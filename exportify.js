@@ -323,7 +323,6 @@ var PlaylistExporter = {
             item.track.artists.map(function(artist) { return artist.name }).join(', '),
             item.track.album.name,
             item.track.duration_ms,
-            item.added_by == null ? '' : item.added_by.display_name,
             item.added_by == null ? '' : item.added_by.uri.slice(13),
             item.added_at
           ].map(function(track) { return '"' + track + '"'; })
@@ -338,7 +337,6 @@ var PlaylistExporter = {
         "Artist Name",
         "Album Name",
         "Track Duration (ms)",
-        "User ID",
         "Added By",
         "Added At"
       ]);
