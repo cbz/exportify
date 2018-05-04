@@ -4,7 +4,7 @@ window.Helpers = {
 
     // Use Exportify application client_id if none given
     if (client_id == '') {
-      client_id = "9950ac751e34487dbbe027c4fd7f8e99"
+      client_id = "1e59d032780d417a9490b17d7e1b4dc2"
     }
 
     window.location = "https://accounts.spotify.com/authorize" +
@@ -319,14 +319,12 @@ var PlaylistExporter = {
       var tracks = responses.map(function(response) {
         return response.items.map(function(item) {
           return [
-            item.track.uri,
             item.track.name,
             item.track.artists.map(function(artist) { return artist.name }).join(', '),
             item.track.album.name,
-            item.track.disc_number,
-            item.track.track_number,
             item.track.duration_ms,
-            item.added_by == null ? '' : item.added_by.uri,
+            item.added_by == null ? '' : item.added_by.display_name,
+            item.added_by == null ? '' : item.added_by.uri.slice(13),
             item.added_at
           ].map(function(track) { return '"' + track + '"'; })
         });
@@ -336,13 +334,11 @@ var PlaylistExporter = {
       tracks = $.map(tracks, function(n) { return n })
 
       tracks.unshift([
-        "Spotify URI",
         "Track Name",
         "Artist Name",
         "Album Name",
-        "Disc Number",
-        "Track Number",
         "Track Duration (ms)",
+        "User ID",
         "Added By",
         "Added At"
       ]);
